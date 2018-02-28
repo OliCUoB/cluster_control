@@ -101,7 +101,6 @@ class Connection(metaclass=ABCMeta):
 
 	def sendCommand(self, list_of_bash_commands):
 		"""This takes a list of commands (in the subprocess module style shell=False) and sends them via subprocess.call(commands_as_a_list)"""
-                # the -T flag in ssh is there because if you don't it opens a new instance of ssh everytime this function is run. It doesn't take long until your computer reaches it's maximum processes and then suddenly nothing can do anything because all the possible processes are being taken up by ssh instances not doing anything.
 		sshProcess = subprocess.Popen(['ssh', '-T', self.ssh_config_alias], stdin=subprocess.PIPE, stdout = subprocess.PIPE, universal_newlines=True, bufsize=0)
 		command = '\n'.join(list_of_bash_commands)
 		print("command = ", command)
